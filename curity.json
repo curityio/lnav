@@ -173,7 +173,7 @@
             "id": { "kind" : "string", "identifier" : true }
         }
     },
-    "curity_requet_log" : {
+    "curity_request_log" : {
         "title" : "Curity request log format",
         "description" : "The format for the Curity Identity Server request logs",
         "regex" : {
