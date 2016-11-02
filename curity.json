@@ -95,7 +95,6 @@
             "dev" : {
                 "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+(?<alert_level>\\w+)\\s+.(?<thread>[-\\w]+).\\s+(?<class>[\\w.]+)(:(?<line>\\d+))?\\s+(?<body>\\S.*)$"
             },
-            /* Version 1.5 changes which added milliseconds and timezone to timestamp */
             "std-1.5+" : {
                 "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4})\\s+(?<alert_level>\\w+)\\s+.(?<thread>[-\\w]+).\\s+(?<class>[\\w.]+)\\s+-\\s+(?<body>\\S.*)$"
             },
