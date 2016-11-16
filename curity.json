@@ -43,15 +43,6 @@
         "sample" : [
             {
                 "line" : "2016-10-11 07:02:31 DEBUG {conf-web-app-TestServer1-spruce} se.curity.identityserver.config.handlers.FilterProcedureConfigHandler:57 - Adding the following filter procedures: [authenticator-filter]"
-            },
-            {
-                "line" : "2016-10-11 07:02:31 DEBUG {conf-web-app-TestServer1-spruce} com.tailf.maapi.MaapiSchemas:3324 - CSType:(nativeType:BUF,parentType:null,defval:null,opaque:null), str:oauth-dev -->"
-            },
-            {
-                "line" : "2016-10-10 14:29:36 WARN  {conf-val-server-spruce} se.curity.identityserver.config.ConfDListenable:1222 - Caught an config exception from Config Service on the cluster communication thread. Config Service on admin node may be down."
-            },
-            {
-                "line" : "2016-10-10 14:29:36 ERROR {confserver-spruce} se.curity.identityserver.app.ConfDStarter:44 - The configuration service halted unexpectedly with code 130: Unknown error See the log file '/Users/tspencer/id/dist/var/log/confsvc.log' for more details"
             }
         ]
     },
@@ -103,7 +94,7 @@
             }
         },
         "json" : false,
-        "timestamp-format" : [ "%Y-%m-%d %H:%M:%S" ],
+        "timestamp-format" : [ "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S:%L%z" ],
         "multiline" : true,
         "level-field" : "alert_level",
         "level" : {
@@ -141,10 +132,7 @@
                 "line" : "2016-10-06 14:17:01 TRACE {main} se.curity.identityserver.app.Bootstrapper - Log configuration file property value = /opt/idsvr/etc/log4j2.xml"
             },
             {
-                "line" : "2016-10-10 14:29:36 WARN  {conf-val-server-spruce} se.curity.identityserver.config.ConfDListenable - Caught an config exception from Config Service on the cluster communication thread. Config Service on admin node may be down."
-            },
-            {
-                "line": "2016-10-10 14:29:36 ERROR {confserver-spruce} se.curity.identityserver.app.ConfDStarter - The configuration service halted unexpectedly with code 130: Unknown error See the log file '/Users/tspencer/id/dist/var/log/confsvc.log' for more details"
+                "line" : "2016-11-16T15:45:18:678+0100 DEBUG {main} se.curity.identityserver.app.AppServer:304 HTTP/2 over TLS is not enabled"
             }
         ]
     },
