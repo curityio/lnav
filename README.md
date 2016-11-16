@@ -24,7 +24,7 @@ lnav recognizes various log file formats out of the box, including generic forma
 
 To install these formats, ensure that [lnav is installed](http://lnav.readthedocs.io/en/latest/intro.html#installation). Then, follow the [instructions in the lnav manual to install these formats](http://lnav.readthedocs.io/en/latest/formats.html#installing-formats). There are a few ways to do this. Specifically, the following will install the formats:
 
-1. `lnav -i https://github.com/curityio/lnav`. This will clone this repository and also make the formats available. It will also make it possible to update the formats easily by executing `lnav -u`.
+1. `lnav -i https://github.com/curityio/lnav.git`. This will clone this repository and also make the formats available. It will also make it possible to update the formats easily by executing `lnav -u`.
 
 2. After cloning this repository, do either of these:
 
