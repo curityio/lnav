@@ -36,7 +36,7 @@
             }
         },
         "regex" : {
-            "dev" : {
+            "std" : {
                 "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+(?<level>(?<alert_level>\\w+)\\s+\\{(?<thread>[-\\w]+)\\}\\s+(?<class>[\\w.]+)):(?<line>\\d+)\\s+-\\s+(?<body>\\S.*)$"
             }            
         },
@@ -80,23 +80,15 @@
         "title" : "Curity server log format",
         "description" : "The format for Cuirty Identity Server logs",
         "regex" : {
-            "std" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+(?<alert_level>\\w+)\\s+.(?<thread>[-\\w]+).\\s+(?<class>[\\w.]+)\\s+-\\s+(?<body>\\S.*)$"
-            },
-            "dev" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+(?<alert_level>\\w+)\\s+.(?<thread>[-\\w]+).\\s+(?<class>[\\w.]+)(:(?<line>\\d+))?\\s+(?<body>\\S.*)$"
-            },
-            "std-1.5+" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4})\\s+(?<alert_level>\\w+)\\s+.(?<thread>[-\\w]+).\\s+(?<class>[\\w.]+)\\s+-\\s+(?<body>\\S.*)$"
-            },
-            "dev-1.5+" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4})\\s+(?<alert_level>\\w+)\\s+.(?<thread>[-\\w]+).\\s+(?<class>[\\w.]+)(:(?<line>\\d+))?\\s+(?<body>\\S.*)$"
+            "std-2.0" : {
+                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w]+)} +(?<class>[\\w.]+)(:(?<line>\\d+))? +(?<body>.*)"
             }
         },
         "json" : false,
         "timestamp-format" : [ "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S:%L%z" ],
         "multiline" : true,
         "level-field" : "alert_level",
+        "opid-field" : "request_id",
         "level" : {
             "error" : "ERROR",
             "warning" : "WARN",
@@ -108,7 +100,15 @@
             "alert_level" : {
                 "kind" : "string",
                 "identifier" : true
-            },            
+            },
+            "request_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "session_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
             "thread" : {
                 "kind" : "string"
             },
@@ -126,13 +126,13 @@
         },
         "sample" : [
             {
-                "line" : "2016-10-06 14:09:41 INFO  {main} se.curity.identityserver.app.Bootstrapper - Using log4j config: XmlConfiguration[location=/opt/idsvr/etc/log4j2.xml]"
+                "line" : "2017-05-08T16:03:48:038+0200 WARN    {conf-Thread-3-30} se.curity.identityserver.config.data.JDBISqlDataAccessConfigurationSetting:65 Running with connection pool disabled. This will severely impact performance, and is only recommended for tested and debugging purposes"
             },
             {
-                "line" : "2016-10-06 14:17:01 TRACE {main} se.curity.identityserver.app.Bootstrapper - Log configuration file property value = /opt/idsvr/etc/log4j2.xml"
+                "line" : "2017-05-08T16:04:42:728+0200 TRACE 76ff899e  {req-61} se.curity.identityserver.util.resources.FileSystemResourceLocator:85 Looking for file system resource at path: assets/images/favicon-normal.png"
             },
             {
-                "line" : "2016-11-16T15:45:18:678+0100 DEBUG {main} se.curity.identityserver.app.AppServer:304 HTTP/2 over TLS is not enabled"
+                "line" : "2017-05-08T16:04:42:006+0200 DEBUG e6683295 38763868 {req-51} se.curity.identityserver.web.RouteHandler:140 Selected Locale: 'en'. Default Locale: 'en'."
             }
         ]
     },
@@ -165,20 +165,23 @@
         "description" : "The format for the Curity Identity Server request logs",
         "regex" : {
             "std" : {
-                "pattern" : "^(?<date>[^|]+)\\|(?<client>[^|]+)\\|(?<method>[^|]+)\\|(?<uri>[^|]+)\\|(?<params>[^|]*)\\|(?<protocol>[^|]+)\\|(?<lang>[^|]*)\\|(?<accept>[^|]*)\\|(?<status>[^|]+)\\|(?<size>[^|]+)\\|(?<content_type>[^|]*)\\|?(?<secure>true|false)?.*$"
+                "pattern" : "^(?<date>[^|]+)\\|(?<request_id>[^|]*)\\|(?<client>[^|]+)\\|(?<method>[^|]+)\\|(?<uri>[^|]+)\\|(?<params>[^|]*)\\|(?<protocol>[^|]+)\\|(?<lang>[^|]*)\\|(?<accept>[^|]*)\\|(?<status>[^|]+)\\|(?<size>[^|]+)\\|(?<content_type>[^|]*)\\|?(?<secure>true|false)?.*$"
             }
         },
         "file-pattern" : ".*request.log",
         "json" : false,
         "timestamp-field" : "date",
-        "timestamp-format" : [ "%Y-%m-%d %H:%M:%S" ],
+        "timestamp-format" : [ "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S:%L%z" ],
         "multiline" : false,
         "level-field" : "status",
         "level" : {
             "error" : "5\\d\\d",
             "warning" : "4\\d\\d"
         },
+        "opid-field" : "request_id",
+        "body-field" : "params",
         "value" : {
+            "request_id" : { "kind": "string", "identifier": true },
             "client" : { "kind" : "string" },
             "method" : { "kind" : "string", "identifier" : true },
             "uri" : { "kind" : "string", "identifier" : true },
@@ -193,16 +196,16 @@
         },
         "sample" : [
             {
-                "line" : "2016-10-06 14:16:22|10.0.113.6|POST|/neo/oauth/v2/token|{}|HTTP/1.1|||400|32768|application/json; charset=utf-8|true"
+                "line" : "2016-10-06 14:16:22|1e03e409|10.0.113.6|POST|/neo/oauth/v2/token|{}|HTTP/1.1|||400|32768|application/json; charset=utf-8|true"
             },
             {
-                "line" : "2016-10-06 14:13:57|10.0.113.6|GET|/oauth/v2/assisted-token/resources/js/assisted-token.min.js|{}|HTTP/1.1|||500|32768|application/javascript;charset=utf-8"
+                "line" : "2016-10-06 14:13:57||10.0.113.6|GET|/oauth/v2/assisted-token/resources/js/assisted-token.min.js|{}|HTTP/1.1|||500|32768|application/javascript;charset=utf-8"
             },
             {
-                "line" : "2016-10-06 14:40:57|10.0.113.6|GET|/authn/authenticate|{\"serviceProviderId\":[\"se.curity\"]}|HTTP/1.1|sv-se|*/*|302|32768|"
+                "line" : "2016-10-06 14:40:57|1e03e409|10.0.113.6|GET|/authn/authenticate|{\"serviceProviderId\":[\"se.curity\"]}|HTTP/1.1|sv-se|*/*|302|32768|"
             },
             {
-                "line" : "2016-10-06 14:12:13|10.0.113.6|POST|/neo/oauth/v2/introspection|{}|HTTP/1.1|||200|32768|application/json; charset=utf-8"
+                "line" : "2016-10-06 14:12:13|1e03e409|10.0.113.6|POST|/neo/oauth/v2/introspection|{}|HTTP/1.1|||200|32768|application/json; charset=utf-8"
             }
         ]
     }
