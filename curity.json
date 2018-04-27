@@ -165,7 +165,7 @@
         "description" : "The format for the Curity Identity Server request logs",
         "regex" : {
             "std" : {
-                "pattern" : "^(?<date>[^|]+)\\|(?<request_id>[^|]*)\\|(?<client>[^|]+)\\|(?<method>[^|]+)\\|(?<uri>[^|]+)\\|(?<params>[^|]*)\\|(?<protocol>[^|]+)\\|(?<lang>[^|]*)\\|(?<accept>[^|]*)\\|(?<status>[^|]+)\\|(?<size>[^|]+)\\|(?<content_type>[^|]*)\\|?(?<secure>true|false)?.*$"
+                "pattern" : "^(?<date>[^|]+)\\|(?<request_id>[^|]*)\\|(?<client>[^|]+)\\|(?<method>[^|]+)\\|(?<uri>[^|]+)\\|(?<params>[^|]*)\\|(?<protocol>[^|]+)\\|(?<lang>[^|]*)\\|(?<accept>[^|]*)\\|(?<status>[^|]+)\\|(?<size>[^|]+)\\|(?<content_type>[^|]*)\\|?(?<secure>true|false)\\|(?<request_headers>[^|]+)\\|(?<response_headers>[^|]+)\\|(?<duration>[0-9]+)$"
             }
         },
         "file-pattern" : ".*request.log",
@@ -192,20 +192,23 @@
             "status" : { "kind" : "integer", "identifier" : true },
             "size" : { "kind" : "integer" },
             "content_type" : { "kind" : "string" },
-            "secure" : { "kind" : "string" }
+            "secure" : { "kind" : "string" },
+            "request_headers" : { "kind" : "string" },
+            "response_headers" : { "kind" : "string" },
+            "duration" : { "kind" : "integer" }
         },
         "sample" : [
             {
-                "line" : "2016-10-06 14:16:22|1e03e409|10.0.113.6|POST|/neo/oauth/v2/token|{}|HTTP/1.1|||400|32768|application/json; charset=utf-8|true"
+                "line" : "2016-10-06 14:16:22|1e03e409|10.0.113.6|POST|/neo/oauth/v2/token|{}|HTTP/1.1|||400|32768|application/json; charset=utf-8|true|{\"X-Frame-Options\":\"DENY\"}|{}|44"
             },
             {
-                "line" : "2016-10-06 14:13:57||10.0.113.6|GET|/oauth/v2/assisted-token/resources/js/assisted-token.min.js|{}|HTTP/1.1|||500|32768|application/javascript;charset=utf-8"
+                "line" : "2016-10-06 14:13:57||10.0.113.6|GET|/oauth/v2/assisted-token/resources/js/assisted-token.min.js|{}|HTTP/1.1|||500|32768|application/javascript;charset=utf-8|false|{}|{}|55"
             },
             {
-                "line" : "2016-10-06 14:40:57|1e03e409|10.0.113.6|GET|/authn/authenticate|{\"serviceProviderId\":[\"se.curity\"]}|HTTP/1.1|sv-se|*/*|302|32768|"
+                "line" : "2016-10-06 14:40:57|1e03e409|10.0.113.6|GET|/authn/authenticate|{\"serviceProviderId\":[\"se.curity\"]}|HTTP/1.1|sv-se|*/*|302|32768|text/plain|true|{}|{}|103"
             },
             {
-                "line" : "2016-10-06 14:12:13|1e03e409|10.0.113.6|POST|/neo/oauth/v2/introspection|{}|HTTP/1.1|||200|32768|application/json; charset=utf-8"
+                "line" : "2016-10-06 14:12:13|1e03e409|10.0.113.6|POST|/neo/oauth/v2/introspection|{}|HTTP/1.1|||200|32768|application/json; charset=utf-8|true|{}|{}|44"
             }
         ]
     }
