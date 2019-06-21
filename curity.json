@@ -81,11 +81,11 @@
         "description" : "The format for Cuirty Identity Server logs",
         "regex" : {
             "std-2.0" : {
-                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w]+)} +(?<class>[\\w.]+)(:(?<line>\\d+))? +(?<body>.*)"
+                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[:,]\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w]+)} +(?<class>[\\w.]+)(:(?<line>\\d+))? +(?<body>.*)"
             }
         },
         "json" : false,
-        "timestamp-format" : [ "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S:%L%z" ],
+        "timestamp-format" : [ "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S:%L%z", "%Y-%m-%dT%H:%M:%S,%L%z" ],
         "multiline" : true,
         "level-field" : "alert_level",
         "opid-field" : "request_id",
@@ -133,6 +133,9 @@
             },
             {
                 "line" : "2017-05-08T16:04:42:006+0200 DEBUG e6683295 38763868 {req-51} se.curity.identityserver.web.RouteHandler:140 Selected Locale: 'en'. Default Locale: 'en'."
+            },
+            {
+                "line" : "2019-04-12T20:58:57,425+0200 DEBUG EfwrPdrp  {req-63} se.curity.identityserver.web.SubrouterHelper - Got renderer se.curity.identityserver.web.AdminApiJsonHttpResponseRenderer@7a34df6a for Controllable se.curity.identityserver.adminapi.AdminApiController@25a4c4ba\n"
             }
         ]
     },
