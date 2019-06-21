@@ -168,7 +168,7 @@
         "description" : "The format for the Curity Identity Server request logs",
         "regex" : {
             "std" : {
-                "pattern" : "^(?<date>[^|]+)\\|(?<request_id>[^|]*)\\|(?<client>[^|]+)\\|(?<method>[^|]+)\\|(?<uri>[^|]+)\\|(?<params>[^|]*)\\|(?<protocol>[^|]+)\\|(?<lang>[^|]*)\\|(?<accept>[^|]*)\\|(?<status>[^|]+)\\|(?<size>[^|]+)\\|(?<content_type>[^|]*)\\|?(?<secure>true|false)\\|(?<request_headers>[^|]+)\\|(?<response_headers>[^|]+)\\|(?<duration>[0-9]+)$"
+                "pattern": "^(?<date>[^|]+)\\|(?<request_id>[^|]*)\\|(?<client>[^|]+)\\|(?<method>[^|]+)\\|(?<uri>[^|]+)\\|(?<params>[^|]*)\\|(?<protocol>[^|]+)\\|(?<lang>[^|]*)\\|(?<accept>[^|]*)\\|(?<status>[^|]+)\\|(?<size>[^|]+)\\|(?<content_type>[^|]*)\\|?(?<secure>true|false)\\|(?<request_headers>(\\{(?:[^{}]|(?:R))*\\})*)\\|(?<response_headers>(\\{(?:[^{}]|(?:R))*\\})*)\\|(?<duration>[0-9]+)$"
             }
         },
         "file-pattern" : ".*request.log",
@@ -212,6 +212,12 @@
             },
             {
                 "line" : "2016-10-06 14:12:13|1e03e409|10.0.113.6|POST|/neo/oauth/v2/introspection|{}|HTTP/1.1|||200|32768|application/json; charset=utf-8|true|{}|{}|44"
+            },
+            {
+                "line": "2019-06-21T20:56:53:823+0200|8I3zh92a|0:0:0:0:0:0:0:1|GET|/assets/images/angle-default.svg|{}|HTTP/1.1|||200|0|image/svg+xml|true|{\"Accept\":\"image/webp,image/apng,image/*,*/*;q\\u003d0.8\",\"Connection\":\"keep-alive\",\"User-Agent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36\",\"Referer\":\"https://localhost:8443/assets/css/axisstyle-1555103795.css\",\"Host\":\"localhost:8443\",\"DNT\":\"1\",\"Accept-Encoding\":\"gzip, deflate, br\",\"Accept-Language\":\"en-US,en;q\\u003d0.9,fa;q\\u003d0.8\"}|{\"Cache-Control\":\"public, max-age\\u003d2628000\",\"X-Content-Type-Options\":\"nosniff\",\"Content-Encoding\":\"gzip\",\"Vary\":\"Accept-Encoding\",\"Date\":\"Fri, 21 Jun 2019 18:56:53 GMT\",\"Content-Type\":\"image/svg+xml\"}|2"
+            },
+            {
+                "line": "2019-05-15T13:44:24:719+0200|X9QDBn8c|10.0.12.31|HEAD|/~/.well-known/openid-configuration||HTTP/1.0|||200|2368|application/json;charset=utf-8|true|||171"
             }
         ]
     }
