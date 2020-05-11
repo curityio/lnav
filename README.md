@@ -1,5 +1,8 @@
 # lnav Add-ons for the Curity Identity Server
 
+[![Quality](https://curity.io/assets/images/badges/lnav-quality.svg)](https://curity.io/resources/code-examples/status/)
+[![Availability](https://curity.io/assets/images/badges/lnav-availability.svg)](https://curity.io/resources/code-examples/status/)
+
 The Curity Identity Server logs various information in log files. To make it easier to view and navigate these logs, the tool [lnav](http://lnav.org) can be used. This tool provides a number of helpful features that make it easier to view and work with the server's logs, including:
 
 * Syntax highlighting of log messages
