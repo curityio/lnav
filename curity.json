@@ -81,7 +81,7 @@
         "description" : "The format for Curity Identity Server logs",
         "regex" : {
             "std-2.0" : {
-                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w\\s]+)} +(?<class>[\\w.]+)(:(?<line>\\d+))? +(?<body>.*)"
+                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w\\s]+)} +(?<class>[\\w.\\$]+)(:(?<line>\\d+))? +(?<body>.*)"
             }
         },
         "json" : false,
@@ -136,6 +136,8 @@
             },
             {
                 "line" : "2019-11-07T15:55:49:941+0100 TRACE   {HikariPool-1 housekeeper} s.c.i.p.l.PluginClassLoader Class com.zaxxer.hikari.pool.HikariPool$1 loaded through plugin classloader"
+            }, {
+                "line" : "2020-07-07T08:18:18:728+0200 TRACE kxOWhqjj e83ea8ce {req-511} se.curity.identityserver.authn.controllers.SsoCookieManager$StandardSsoSessions Creating an empty session"
             }
         ]
     },
