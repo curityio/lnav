@@ -1,4 +1,5 @@
 {
+   "$schema": "https://lnav.org/schemas/format-v1.schema.json",
     "curity_cluster_log" : {
         "title" : "Curity cluster log format",
         "description" : "The format of the Curity Identity Server cluster log",
@@ -81,7 +82,7 @@
         "description" : "The format for Curity Identity Server logs",
         "regex" : {
             "std-2.0" : {
-                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w\\s]+)} +(?<class>[\\w.\\$]+)(:(?<line>\\d+))? +(?<body>.*)"
+                "pattern" : "(?<timestamp>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}:\\d{3}[-+]\\d{4}) +(?<alert_level>(TRACE|DEBUG|INFO|WARN|ERROR)) {1,2}((?<request_id>[^ ]{8,})?| ) ((?<session_id>([^ ]+))?| ) {(?<thread>[-\\w\\s]+)?} +(?<class>[\\w.\\$]+)(:(?<line>\\d+))? +(?<body>.*)"
             }
         },
         "json" : false,
